@@ -1,0 +1,66 @@
+import { urlSchema } from "../schemas/common";
+
+export const COST_CODE_IDS: Record<string, number> = {
+  Consulting: 1,
+  softwareDevelopment: 2,
+  graphicDesign: 3,
+  onSiteSupportInfrastructure: 5,
+  onSiteSupportSoftware: 6,
+  telephonicSupportInfrastructure: 8,
+  telephonicSupportSoftware: 9,
+  telephonicSupportInternet: 10,
+  telephonicSupportHosting: 11,
+  salesInternet: 13,
+  salesHosting: 14,
+  webUpdate: 15,
+  qualityAssurance: 16,
+  softwareDesign: 18,
+  documentation: 19,
+  testingSoftware: 20,
+  testingWeb: 21,
+  testingHardware: 22,
+  testingInfrastructure: 23,
+  bugFix: 24,
+  miscellaneous: 26,
+  management: 27,
+  support: 28,
+  dataCapturing: 29,
+  research: 30,
+  report: 31,
+  socialMarketing: 33,
+  supportCalloutJHB: 34,
+  supportInHouse: 35,
+  deployment: 36,
+  onsiteSupport: 37,
+  remoteSupport: 38,
+  training: 40,
+  styling: 41,
+  seo: 42,
+  scrumAndProjectAdministration: 43,
+  marketingAutomation: 45,
+  onlineMarketing: 46,
+  copywriting: 48,
+  uXDesign: 51,
+  serverMaintenance: 52,
+  timesheets: 57,
+  dailyStandupMeeting: 59,
+  supportManagement: 60,
+  planningAndDesign: 61,
+} as const;
+
+export const API_URL = "https://office.warpdevelopment.com/api/";
+
+export const ENDPOINTS = {
+  me: {
+    method: "GET",
+    url: urlSchema.parse(API_URL + "users/me"),
+  },
+  getProjects: {
+    method: "GET",
+    url: urlSchema.parse(API_URL + "Project"),
+  },
+  authorise: {
+    method: "POST",
+    url: urlSchema.parse(API_URL + "account/authorise"),
+  },
+};
