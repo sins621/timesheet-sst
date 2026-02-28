@@ -39,7 +39,7 @@
     },
     {
       "label": "Development Suite",
-      "dependsOn": ["Test Watch", "Storybook"],
+      "dependsOn": ["Dev", "Test Watch", "Storybook"],
       "isBackground": true,
       "presentation": {
         "reveal": "never",
@@ -48,4 +48,3 @@
     }
   ]
 }
-  
