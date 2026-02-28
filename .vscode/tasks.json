@@ -1,0 +1,51 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "type": "npm",
+      "script": "test:vitest:watch",
+      "problemMatcher": [],
+      "label": "Test Watch",
+      "detail": "vitest",
+      "isBackground": true,
+      "icon": {
+        "color": "terminal.ansiYellow",
+        "id": "beaker"
+      }
+    },
+    {
+      "type": "npm",
+      "script": "dev",
+      "problemMatcher": [],
+      "label": "Dev",
+      "detail": "next dev",
+      "isBackground": true,
+      "icon": {
+        "color": "terminal.ansiWhite",
+        "id": "run"
+      }
+    },
+    {
+      "type": "npm",
+      "script": "storybook",
+      "problemMatcher": [],
+      "label": "Storybook",
+      "detail": "storybook dev -p 6006 --no-open",
+      "isBackground": true,
+      "icon": {
+        "color": "terminal.ansiCyan",
+        "id": "book"
+      }
+    },
+    {
+      "label": "Development Suite",
+      "dependsOn": ["Test Watch", "Storybook"],
+      "isBackground": true,
+      "presentation": {
+        "reveal": "never",
+        "focus": false
+      }
+    }
+  ]
+}
+  
