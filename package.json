@@ -6,7 +6,7 @@
     "dev": "dotenvx run -f .env.local -- next dev",
     "build": "dotenvx run -f .env.local -- next build",
     "start": "dotenvx run -f .env.local -- next start",
-    "lint": "edotenvx slint",
+    "lint": "dotenvx slint",
     "storybook": "dotenvx run -f .env.local -- storybook dev -p 6006 --no-open",
     "build-storybook": "dotenvx run -f .env.local -- storybook build",
     "test:vitest:run": "dotenvx run -f .env.local -- vitest run",
