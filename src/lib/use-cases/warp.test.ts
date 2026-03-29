@@ -22,7 +22,7 @@ describe("getAuthToken", async () => {
     expect(result.isOk()).toBe(true);
 
     if (result.isErr()) {
-      throw new Error(result.error);
+      throw new Error(result.error.type);
     }
 
     expect(result.value).toEqual(correctResponse.token);
@@ -96,7 +96,7 @@ describe("getProjects", async () => {
     const result = await getProjects(authHeaders);
 
     if (result.isErr()) {
-      throw new Error(result.error);
+      throw new Error(result.error.type);
     }
     expect(result.isOk()).toBe(true);
     expect(result.value).toEqual(correctResponse);
