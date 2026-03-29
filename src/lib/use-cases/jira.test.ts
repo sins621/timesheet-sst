@@ -1,25 +1,30 @@
 import nock from "nock";
 import { it, describe, expect } from "vitest";
-import { getProjects } from "./jira";
-import { exampleProject } from "../test-data/jira";
+import { getProjects, getPaginatedProjects } from "./jira";
+import {
+  exampleProject,
+  exampleProjectPaginatedSearchResult,
+  exampleQueriedProjectPaginatedSearchResult,
+} from "../test-data/jira";
 import { getTestData } from "../test-data/common";
 import { constructBasicAuthHeaders } from "./common";
 
 describe("getProjects", async () => {
   it("it should return an array of projects", async () => {
     const testProjects = getTestData(3, exampleProject);
-    const testUser = "john@example.com";
-    const testPassword = "abc123";
-    const authHeaders = constructBasicAuthHeaders(testUser, testPassword);
+    const TEST_USER = "john@example.com";
+    const TEST_PASSWORD = "abc123";
+    const authHeaders = constructBasicAuthHeaders(TEST_USER, TEST_PASSWORD);
+    const TEST_AUTH_HEADERS = "Basic am9obkBleGFtcGxlLmNvbTphYmMxMjM=";
 
     nock("https://warpdevelopment.atlassian.net")
       .get("/rest/api/3/project")
-      .matchHeader("Authorization", "Basic am9obkBleGFtcGxlLmNvbTphYmMxMjM=")
+      .matchHeader("Authorization", TEST_AUTH_HEADERS)
       .reply(200, testProjects);
 
     const result = await getProjects(authHeaders);
     if (result.isErr()) {
-      throw new Error(result.error);
+      throw new Error(result.error.type);
     }
     expect(result.isOk()).toBe(true);
     expect(result.value).toEqual(testProjects);
