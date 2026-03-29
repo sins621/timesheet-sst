@@ -1,22 +1,18 @@
 import { z } from "zod";
 
-export const avatarUrlsSchema = z.
-  object({
-    "48x48": z.url(),
-    "24x24": z.url(),
-    "16x16": z.url(),
-    "32x32": z.url(),
-  })
-  .brand<"jiraAvatarsUrl">();
+export const avatarUrlsSchema = z.object({
+  "48x48": z.url(),
+  "24x24": z.url(),
+  "16x16": z.url(),
+  "32x32": z.url(),
+});
 
-export const projectCategorySchema = z.
-  object({
-    self: z.url(),
-    id: z.union([z.number(), z.string()]),
-    name: z.string(),
-    description: z.string()
-  })
-  .brand<"jiraProjectCategory">();
+export const projectCategorySchema = z.object({
+  self: z.url(),
+  id: z.union([z.number(), z.string()]),
+  name: z.string(),
+  description: z.string(),
+});
 
 export const projectSchema = z.object({
   expand: z.string(),
