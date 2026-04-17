@@ -10,7 +10,7 @@ export async function getAuthToken(
   email: WarpEmail,
   password: string,
 ): Promise<Result<string, Errors.InfraError>> {
-              const result = await ResultAsync.fromPromise(
+  const result = await ResultAsync.fromPromise(
     got
       .post(warpEndpoints.authorise.url, {
         json: {
@@ -45,9 +45,8 @@ export async function getProjects(
 
   if (result.isErr()) return err(result.error);
 
-  const parseResult = Result.fromThrowable(
-    projectSchema.array().parse,
-    (e) => Errors.validationError(e as Error),
+  const parseResult = Result.fromThrowable(projectSchema.array().parse, (e) =>
+    Errors.validationError(e as Error),
   )(result.value);
 
   if (parseResult.isErr()) return err(parseResult.error);
