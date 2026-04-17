@@ -1,15 +1,14 @@
 "use client";
 
 import { stubInputSchema } from "@/lib/schemas/forms";
-import { defineStepper } from "@stepperize/react";
-import { useForm, FormProvider, useFormContext } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  StubInputSchema,
   StubMessageInputSchema,
   StubStatusInputSchema,
-  StubTypeInputSchema,
+  StubTypeInputSchema
 } from "@/lib/types/forms";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { defineStepper } from "@stepperize/react";
+import { FormProvider, useForm, useFormContext } from "react-hook-form";
 
 const { Scoped, useStepper } = defineStepper(
   {
