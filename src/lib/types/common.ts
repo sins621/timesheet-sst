@@ -20,3 +20,8 @@ export type ApiRequest<TResponse, TParams> = (
   authHeaders: AuthHeaders,
   searchParams?: TParams,
 ) => Promise<Result<TResponse, Error>>;
+
+export type OptionItem = {
+  label: string;
+  value: string;
+}
