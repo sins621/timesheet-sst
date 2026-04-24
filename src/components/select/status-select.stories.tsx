@@ -1,6 +1,6 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
-import StatusSelect from './status-select';
+import StatusSelect from "./status-select";
 
 const meta = {
   component: StatusSelect,
@@ -12,13 +12,13 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   args: {
-    "title": "title",
-    "placeholder": "placeholder",
-    "options": [
+    title: "title",
+    placeholder: "placeholder",
+    options: [
       {
-        "id": "id",
-        "displayText": "displayText"
-      }
-    ]
+        label: "label",
+        value: "value",
+      },
+    ],
   },
 };
