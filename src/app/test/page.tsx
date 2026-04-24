@@ -22,6 +22,8 @@ export default async function Page({ searchParams }: Props) {
 
   const signIn = async () => {
     "use server";
+
+
     const response = await auth.api.signInSocial({
       body: {
         provider: "microsoft",
