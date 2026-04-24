@@ -1,13 +1,14 @@
 "use client";
 
 import { OptionItem } from "@/lib/types/common";
-import { defineStepper } from "@stepperize/react";
+import { type ReactNode, useState } from "react";
 import TypeButton from "../buttons/type-button";
 import StatusSelect from "../select/status-select";
 import { Button } from "../ui/button";
 import { Progress } from "../ui/progress";
+import { defineStepper } from "@stepperize/react";
 
-const { Scoped, useStepper } = defineStepper(
+const { Scoped: StubStepperScope, useStepper: useStubStepper } = defineStepper(
   {
     id: "type",
     title: "Ticket Type",
@@ -22,126 +23,146 @@ const { Scoped, useStepper } = defineStepper(
   },
 );
 
-export function StubStepperRoot() {
+type StubStepperRootProps = {
+  children?: ReactNode;
+};
+
+export function StubStepperRoot(props: StubStepperRootProps) {
   return (
-    <Scoped>
-      <div className="border p-2 flex flex-col gap-2">
-        <StubStepperProgress />
-        <StubStepperForm />
-        <StubStepperNav />
-      </div>
-    </Scoped>
+    <StubStepperScope>
+      <div className="border p-2 flex flex-col gap-2">{props.children}</div>
+    </StubStepperScope>
   );
 }
 
-export function StubStepperForm() {
-  const stepper = useStepper();
+type StubStepperFormProps = {
+  children?: ReactNode | ((props: { stepper: ReturnType<typeof useStubStepper> }) => ReactNode);
+};
 
-  const onValid = () => {
-    if (!stepper.state.isLast) stepper.navigation.next();
-  };
+export function StubStepperForm(props: StubStepperFormProps) {
+  const stepper = useStubStepper();
 
-  return (
-    <>
-      {stepper.flow.switch({
-        type: () => <StubStepperType />,
-        status: () => <StubStepperStatus />,
-        message: () => <StubStepperMessage />,
-      })}
-    </>
-  );
+  if (typeof props.children === "function") {
+    return <>{props.children({ stepper })}</>;
+  }
+
+  return <>{props.children}</>;
 }
 
 export function StubStepperNav() {
   return <div></div>;
 }
 
-export function StubStepperType() {
-  const stepper = useStepper();
+type StubStepperTypeProps = {
+  onStationaryClick: () => void;
+  onTransitionedClick: () => void;
+};
 
+export function StubStepperType(props: StubStepperTypeProps) {
   return (
     <div className="flex flex-col gap-2">
       <TypeButton
         title="Stationary"
         description="A ticket that has stayed in the same status for the day"
-        onClick={() => stepper.navigation.next()}
+        onClick={props.onStationaryClick}
       />
       <TypeButton
         title="Transitioned"
         description="A ticket that has moved from one status to another"
-        onClick={() => stepper.navigation.next()}
+        onClick={props.onTransitionedClick}
       />
     </div>
   );
 }
 
-export function StubStepperStatus() {
-  const stepper = useStepper();
+type StubStepperSingleStatusProps = {
+  onConfirm: (value: string) => void;
+  options: OptionItem[];
+};
 
-  const selectOneOptions: OptionItem[] = [
-    {
-      value: "1",
-      label: "Option 1",
-    },
-    {
-      value: "2",
-      label: "Option 2",
-    },
-  ];
-  const selectTwoOptions = [
-    {
-      value: "3",
-      label: "Status A",
-    },
-    {
-      value: "4",
-      label: "Option 2",
-    },
-  ];
+export function StubStepperSingleStatus(props: StubStepperSingleStatusProps) {
+  const [selectedValue, setSelectedValue] = useState<string | null>(null);
 
   return (
     <div className="flex flex-col gap-2">
       <StatusSelect
         title="Starting Status"
         placeholder="Option 1"
-        options={selectOneOptions}
+        options={props.options}
+        value={selectedValue}
+        onValueChange={setSelectedValue}
       />
-      <StatusSelect
-        title="Ending Status"
-        placeholder="Option 2"
-        options={selectTwoOptions}
-      />
-      <Button className="w-full" onClick={() => stepper.navigation.next()}>
+      <Button
+        className="w-full"
+        disabled={!selectedValue}
+        onClick={() => {
+          if (!selectedValue) return;
+          props.onConfirm(selectedValue);
+        }}
+      >
         Confirm
       </Button>
     </div>
   );
 }
 
-export function StubStepperMessage() {
-  const messageOptions: OptionItem[] = [
-    {
-      value: "1",
-      label: "Option 1",
-    },
-    {
-      value: "2",
-      label: "Option 2",
-    },
-    {
-      value: "3",
-      label: "Status A",
-    },
-    {
-      value: "4",
-      label: "Option 2",
-    },
-  ];
+type StubStepperDualStatusProps = {
+  onConfirm: ({ valueA, valueB }: { valueA: string; valueB: string }) => void;
+  optionsA: OptionItem[];
+  optionsB: OptionItem[];
+};
+
+export function StubStepperDualStatus(props: StubStepperDualStatusProps) {
+  const [selectedValueA, setSelectedValueA] = useState<string | null>(null);
+  const [selectedValueB, setSelectedValueB] = useState<string | null>(null);
 
   return (
+    <div className="flex flex-col gap-2">
+      <StatusSelect
+        title="Starting Status"
+        placeholder="Option 1"
+        options={props.optionsA}
+        value={selectedValueA}
+        onValueChange={setSelectedValueA}
+      />
+      <StatusSelect
+        title="Ending Status"
+        placeholder="Option 2"
+        options={props.optionsB}
+        value={selectedValueB}
+        onValueChange={setSelectedValueB}
+      />
+      <Button
+        className="w-full"
+        disabled={!selectedValueA || !selectedValueB}
+        onClick={() => {
+          if (!selectedValueA || !selectedValueB) return;
+          props.onConfirm({ valueA: selectedValueA, valueB: selectedValueB });
+        }}
+      >
+        Confirm
+      </Button>
+    </div>
+  );
+}
+
+type StubStepperMessageProps = {
+  messageOptions: Array<
+    OptionItem & {
+      onClick: (value: string) => void;
+    }
+  >;
+};
+
+export function StubStepperMessage(props: StubStepperMessageProps) {
+  return (
     <div className="flex flex-col gap-2 justify-items-center">
-      {messageOptions.map((option) => (
-        <button key={option.value} className="border p-2">
+      {props.messageOptions.map((option) => (
+        <button
+          onClick={() => option.onClick(option.value)}
+          key={option.value}
+          className="border p-2"
+        >
           <span>{option.label}</span>
         </button>
       ))}
@@ -150,7 +171,7 @@ export function StubStepperMessage() {
 }
 
 export function StubStepperProgress() {
-  const stepper = useStepper();
+  const stepper = useStubStepper();
 
   const title = stepper.state.current.data.title;
   const stepOneProgress = stepper.state.isFirst ? 0 : 100;
@@ -170,3 +191,5 @@ export function StubStepperProgress() {
     </div>
   );
 }
+
+export { StubStepperScope, useStubStepper };
