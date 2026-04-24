@@ -3,7 +3,7 @@
 import { OptionItem } from "@/lib/types/common";
 import { type ReactNode, useState } from "react";
 import TypeButton from "../buttons/type-button";
-import StatusSelect from "../select/status-select";
+import LabelledSelect from "../select/labelled-select";
 import { Button } from "../ui/button";
 import { Progress } from "../ui/progress";
 import { defineStepper } from "@stepperize/react";
@@ -85,7 +85,7 @@ export function StubStepperSingleStatus(props: StubStepperSingleStatusProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <StatusSelect
+      <LabelledSelect
         title="Starting Status"
         placeholder="Option 1"
         options={props.options}
@@ -118,14 +118,14 @@ export function StubStepperDualStatus(props: StubStepperDualStatusProps) {
 
   return (
     <div className="flex flex-col gap-2">
-      <StatusSelect
+      <LabelledSelect
         title="Starting Status"
         placeholder="Option 1"
         options={props.optionsA}
         value={selectedValueA}
         onValueChange={setSelectedValueA}
       />
-      <StatusSelect
+      <LabelledSelect
         title="Ending Status"
         placeholder="Option 2"
         options={props.optionsB}
