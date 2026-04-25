@@ -10,7 +10,7 @@ type TypeButtonProps = {
 export default function TypeButton(props: TypeButtonProps) {
   return (
     <button
-      className={cn("border flex flex-col gap-2 p-2", props.className)}
+      className={cn("border flex flex-col gap-2 p-2 rounded-lg", props.className)}
       onClick={props.onClick}
     >
       <span>{props.title}</span>

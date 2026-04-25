@@ -12,7 +12,7 @@ export default function OptionButtonSelect(props: OptionButtonSelectProps) {
         <button
           onClick={() => props.onClick(option.value)}
           key={option.value}
-          className="border p-2"
+          className="border rounded-lg p-2"
         >
           <span>{option.label}</span>
         </button>
