@@ -30,13 +30,17 @@ type StubStepperRootProps = {
 export function StubStepperRoot(props: StubStepperRootProps) {
   return (
     <StubStepperScope>
-      <div className="border p-2 flex flex-col gap-2">{props.children}</div>
+      <div className="border p-2 flex flex-col gap-2 rounded-lg">
+        {props.children}
+      </div>
     </StubStepperScope>
   );
 }
 
 type StubStepperFormProps = {
-  children?: ReactNode | ((props: { stepper: ReturnType<typeof useStubStepper> }) => ReactNode);
+  children?:
+    | ReactNode
+    | ((props: { stepper: ReturnType<typeof useStubStepper> }) => ReactNode);
 };
 
 export function StubStepperForm(props: StubStepperFormProps) {
@@ -187,7 +191,10 @@ export function StubStepperProgress() {
         onClick={() => stepper.navigation.goTo("status")}
         value={stepTwoProgress}
       />
-      <Progress onClick={() => stepper.navigation.goTo("message")} value={0} />
+      <Progress
+        onClick={() => stepper.navigation.goTo("message")}
+        value={0}
+      />
     </div>
   );
 }
