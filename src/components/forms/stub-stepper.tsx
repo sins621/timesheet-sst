@@ -1,12 +1,10 @@
 "use client";
 
 import { OptionItem } from "@/lib/types/common";
-import { type ReactNode, useState } from "react";
-import TypeButton from "../buttons/type-button";
-import LabelledSelect from "../select/labelled-select";
-import { Button } from "../ui/button";
-import { Progress } from "../ui/progress";
 import { defineStepper } from "@stepperize/react";
+import { type ReactNode } from "react";
+import TypeButton from "../buttons/type-button";
+import { Progress } from "../ui/progress";
 
 const { Scoped: StubStepperScope, useStepper: useStubStepper } = defineStepper(
   {
@@ -79,75 +77,12 @@ export function StubStepperType(props: StubStepperTypeProps) {
   );
 }
 
-type StubStepperSingleStatusProps = {
-  onConfirm: (value: string) => void;
-  options: OptionItem[];
-};
-
-export function StubStepperSingleStatus(props: StubStepperSingleStatusProps) {
-  const [selectedValue, setSelectedValue] = useState<string | null>(null);
-
-  return (
-    <div className="flex flex-col gap-2">
-      <LabelledSelect
-        title="Starting Status"
-        placeholder="Option 1"
-        options={props.options}
-        value={selectedValue}
-        onValueChange={setSelectedValue}
-      />
-      <Button
-        className="w-full"
-        disabled={!selectedValue}
-        onClick={() => {
-          if (!selectedValue) return;
-          props.onConfirm(selectedValue);
-        }}
-      >
-        Confirm
-      </Button>
-    </div>
-  );
+export function StubStepperSingleStatus() {
+  return <div>wip</div>;
 }
 
-type StubStepperDualStatusProps = {
-  onConfirm: ({ valueA, valueB }: { valueA: string; valueB: string }) => void;
-  optionsA: OptionItem[];
-  optionsB: OptionItem[];
-};
-
-export function StubStepperDualStatus(props: StubStepperDualStatusProps) {
-  const [selectedValueA, setSelectedValueA] = useState<string | null>(null);
-  const [selectedValueB, setSelectedValueB] = useState<string | null>(null);
-
-  return (
-    <div className="flex flex-col gap-2">
-      <LabelledSelect
-        title="Starting Status"
-        placeholder="Option 1"
-        options={props.optionsA}
-        value={selectedValueA}
-        onValueChange={setSelectedValueA}
-      />
-      <LabelledSelect
-        title="Ending Status"
-        placeholder="Option 2"
-        options={props.optionsB}
-        value={selectedValueB}
-        onValueChange={setSelectedValueB}
-      />
-      <Button
-        className="w-full"
-        disabled={!selectedValueA || !selectedValueB}
-        onClick={() => {
-          if (!selectedValueA || !selectedValueB) return;
-          props.onConfirm({ valueA: selectedValueA, valueB: selectedValueB });
-        }}
-      >
-        Confirm
-      </Button>
-    </div>
-  );
+export function StubStepperDualStatus() {
+  return <div>wip</div>;
 }
 
 type StubStepperMessageProps = {
@@ -177,7 +112,6 @@ export function StubStepperMessage(props: StubStepperMessageProps) {
 export function StubStepperProgress() {
   const stepper = useStubStepper();
 
-  const title = stepper.state.current.data.title;
   const stepOneProgress = stepper.state.isFirst ? 0 : 100;
   const stepTwoProgress = stepper.state.isLast ? 100 : 0;
 
@@ -191,10 +125,7 @@ export function StubStepperProgress() {
         onClick={() => stepper.navigation.goTo("status")}
         value={stepTwoProgress}
       />
-      <Progress
-        onClick={() => stepper.navigation.goTo("message")}
-        value={0}
-      />
+      <Progress onClick={() => stepper.navigation.goTo("message")} value={0} />
     </div>
   );
 }
