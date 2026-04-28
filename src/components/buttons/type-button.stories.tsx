@@ -1,6 +1,7 @@
-import type { Meta, StoryObj } from '@storybook/nextjs-vite';
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
 
-import TypeButton from './type-button';
+import TypeButton from "./type-button";
+import { fn } from "storybook/test";
 
 const meta = {
   component: TypeButton,
@@ -13,6 +14,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {
     title: "Title",
-    description: "This is a long description for the button"
-  }
+    description: "This is a long description for the button",
+    onClick: fn(),
+  },
 };
