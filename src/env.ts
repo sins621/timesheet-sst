@@ -1,5 +1,6 @@
 import { createEnv } from "@t3-oss/env-nextjs";
 import { z } from "zod";
+import { warpEmailSchema } from "./lib/schemas/common";
 
 export const env = createEnv({
   server: {
@@ -12,6 +13,8 @@ export const env = createEnv({
     ATLASSIAN_CLIENT_ID: z.string().min(1),
     ATLASSIAN_CLIENT_SECRET: z.string().min(1),
     APP_ENV: z.string().min(1),
+    WARP_TEST_USERNAME: warpEmailSchema,
+    WARP_TEST_PASSWORD: z.string().min(1),
   },
   client: {
     NEXT_PUBLIC_ENABLE_MSW_MOCK: z.coerce.boolean(),
@@ -27,5 +30,7 @@ export const env = createEnv({
     ATLASSIAN_CLIENT_SECRET: process.env.ATLASSIAN_CLIENT_SECRET,
     APP_ENV: process.env.APP_ENV,
     NEXT_PUBLIC_ENABLE_MSW_MOCK: process.env.NEXT_PUBLIC_ENABLE_MSW_MOCK,
+    WARP_TEST_USERNAME: process.env.WARP_TEST_USERNAME,
+    WARP_TEST_PASSWORD: process.env.WARP_TEST_PASSWORD,
   },
 });
