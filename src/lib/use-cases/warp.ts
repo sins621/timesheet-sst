@@ -1,16 +1,16 @@
-import { ENDPOINTS as warpEndpoints } from "../constants/warp";
-import type { WarpEmail, Project } from "../types/warp";
-import type { AuthHeaders } from "../types/common";
-import { Result, ResultAsync, err, ok } from "neverthrow";
-import { got } from "got";
-import { tokenResponseSchema, projectSchema } from "../schemas/warp";
 import * as Errors from "@/lib/constants/errors/infraError";
+import { got } from "got";
+import { ResultAsync, err, ok } from "neverthrow";
+import { ENDPOINTS as warpEndpoints } from "../constants/warp";
+import { projectSchema, tokenResponseSchema } from "../schemas/warp";
+import type { AuthHeaders } from "../types/common";
+import type { Project, WarpEmail } from "../types/warp";
 
-export async function getAuthToken(
+export const getAuthToken = (
   email: WarpEmail,
   password: string,
-): Promise<Result<string, Errors.InfraError>> {
-  const result = await ResultAsync.fromPromise(
+): ResultAsync<string, Errors.InfraError> =>
+  ResultAsync.fromPromise(
     got
       .post(warpEndpoints.authorise.url, {
         json: {
@@ -20,36 +20,26 @@ export async function getAuthToken(
       })
       .json(),
     (e) => Errors.externalServiceError("Warp Endpoint", e as Error),
-  );
+  ).andThen((response) => {
+    const parsed = tokenResponseSchema.safeParse(response);
 
-  if (result.isErr()) return err(result.error);
+    if (!parsed.success) return err(Errors.validationError(parsed.error));
 
-  const parseResult = Result.fromThrowable(tokenResponseSchema.parse, (e) =>
-    Errors.validationError(e as Error),
-  )(result.value);
+    return ok(parsed.data.token);
+  });
 
-  if (parseResult.isErr()) return err(parseResult.error);
-
-  return ok(parseResult.value.token);
-}
-
-export async function getProjects(
+export const getProjects = (
   authHeaders: AuthHeaders,
-): Promise<Result<Project[], Errors.InfraError>> {
-  const result = await ResultAsync.fromPromise(
+): ResultAsync<Project[], Errors.InfraError> =>
+  ResultAsync.fromPromise(
     got(warpEndpoints.getProjects.url, {
       headers: authHeaders,
     }).json(),
     (e) => Errors.externalServiceError("Warp Endpoint", e as Error),
-  );
+  ).andThen((response) => {
+    const parsed = projectSchema.array().safeParse(response);
 
-  if (result.isErr()) return err(result.error);
+    if (!parsed.success) return err(Errors.validationError(parsed.error));
 
-  const parseResult = Result.fromThrowable(projectSchema.array().parse, (e) =>
-    Errors.validationError(e as Error),
-  )(result.value);
-
-  if (parseResult.isErr()) return err(parseResult.error);
-
-  return ok(parseResult.value);
-}
+    return ok(parsed.data);
+  });

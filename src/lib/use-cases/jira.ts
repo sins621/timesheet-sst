@@ -1,55 +1,44 @@
+import * as Errors from "@/lib/constants/errors/infraError";
 import { got } from "got";
-import type { Project, ProjectPaginatedSearch } from "../types/jira";
-import { projectPaginatedSearchSchema, projectSchema } from "../schemas/jira";
-import type { ApiRequest, AuthHeaders } from "../types/common";
-import { Result, ResultAsync, err, ok } from "neverthrow";
+import { err, ok, ResultAsync } from "neverthrow";
 import {
   ENDPOINTS as jiraEndpoints,
   ProjectPaginatedSearchParams,
 } from "../constants/jira";
-import * as Errors from "@/lib/constants/errors/infraError";
+import { projectPaginatedSearchSchema, projectSchema } from "../schemas/jira";
+import type { ApiRequest, AuthHeaders } from "../types/common";
+import type { Project, ProjectPaginatedSearch } from "../types/jira";
 
-export async function getProjects(
+export const getProjects = (
   authHeaders: AuthHeaders,
-): Promise<Result<Project[], Errors.InfraError>> {
-  const result = await ResultAsync.fromPromise(
+): ResultAsync<Project[], Errors.InfraError> =>
+  ResultAsync.fromPromise(
     got(jiraEndpoints.projectSearch.url, {
       headers: authHeaders,
     }).json(),
     (e) => Errors.externalServiceError("Jira Endpoint", e as Error),
-  );
+  ).andThen((response) => {
+    const parsed = projectSchema.array().safeParse(response);
 
-  if (result.isErr()) return err(result.error);
+    if (!parsed.success) return err(Errors.validationError(parsed.error));
 
-  const parseResult = Result.fromThrowable(projectSchema.array().parse, (e) =>
-    Errors.validationError(e as Error),
-  )(result.value);
-
-  if (parseResult.isErr()) return err(parseResult.error);
-
-  return ok(parseResult.value);
-}
+    return ok(parsed.data);
+  });
 
 export const getPaginatedProjects: ApiRequest<
   ProjectPaginatedSearch,
   ProjectPaginatedSearchParams
-> = async (authHeaders, searchParams) => {
-  const result = await ResultAsync.fromPromise(
+> = async (authHeaders, searchParams) =>
+  ResultAsync.fromPromise(
     got(jiraEndpoints.projectPaginatedSearch.url, {
       headers: authHeaders,
       searchParams: new URLSearchParams(searchParams),
     }).json(),
     (e) => Errors.externalServiceError("Jira Endpoint", e as Error),
-  );
+  ).andThen((response) => {
+    const parsed = projectPaginatedSearchSchema.safeParse(response);
 
-  if (result.isErr()) return err(result.error);
+    if (!parsed.success) return err(Errors.validationError(parsed.error));
 
-  const parseResult = Result.fromThrowable(
-    projectPaginatedSearchSchema.parse,
-    (e) => Errors.validationError(e as Error),
-  )(result.value);
-
-  if (parseResult.isErr()) return err(parseResult.error);
-
-  return ok(parseResult.value);
-};
+    return ok(parsed.data);
+  });

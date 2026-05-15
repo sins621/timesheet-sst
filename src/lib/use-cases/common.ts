@@ -1,14 +1,15 @@
 import type { AuthHeaders } from "../types/common";
 
-export function constructBearerAuthHeaders(token: string): AuthHeaders {
+export const constructBearerAuthHeaders = (token: string): AuthHeaders => {
   return { Authorization: `Bearer ${token}` };
-}
+};
 
-export function constructBasicAuthHeaders(
+export const constructBasicAuthHeaders = (
   username: string,
   password: string,
-): AuthHeaders {
+): AuthHeaders => {
   return {
-    Authorization: "Basic " + Buffer.from(`${username}:${password}`).toString("base64"),
+    Authorization:
+      "Basic " + Buffer.from(`${username}:${password}`).toString("base64"),
   };
-}
+};
