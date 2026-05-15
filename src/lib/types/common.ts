@@ -16,6 +16,8 @@ export type AuthHeaders = { Authorization: string };
 export type ApiRequestOptions = {
   params?: Record<string, string | number>;
 };
+
+// I'mma keep it real man idk what the hell I was trying here -B.C.
 export type ApiRequest<TResponse, TParams> = (
   authHeaders: AuthHeaders,
   searchParams?: TParams,
