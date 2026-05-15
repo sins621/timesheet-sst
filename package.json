@@ -2,6 +2,10 @@
   "name": "timesheet-sst",
   "version": "0.1.0",
   "private": true,
+  "prettier": {
+    "useTabs": false,
+    "tabWidth": 2
+  },
   "scripts": {
     "dev": "dotenvx run -f .env.local -- next dev",
     "build": "dotenvx run -f .env.local -- next build",
