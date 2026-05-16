@@ -30,7 +30,7 @@ This project will be managed using Github Projects. You can find the link to it
 essentially a ticket and the only rule in this repository is that only 
 mainters can open issues. If you have a feature request, a bug report or any
 other inquiry please head towards the [discussion](https://github.com/sins621/timesheet-sst/discussions) section of
-this repository
+this repository.
 
 ## Contributing
 
