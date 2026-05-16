@@ -25,9 +25,12 @@ There is a longer planning document available here: [link](./docs/outline.md)
 
 ## Issue tracking
 
-I'm giving [Fizzy](https://www.fizzy.do/) a try which is a Kanban board made by the
-people over at Basecamp and fortunately it's possible to make the board publically
-viewable [here](https://app.fizzy.do/6200411/public/boards/HnAkwSq5KsHCeVzEA7JV7t5q)
+This project will be managed using Github Projects. You can find the link to it
+[here](https://github.com/users/sins621/projects/2). A Github 'issue' is 
+essentially a ticket and the only rule in this repository is that only 
+mainters can open issues. If you have a feature request, a bug report or any
+other inquiry please head towards the [discussion](https://github.com/sins621/timesheet-sst/discussions) section of
+this repository
 
 ## Contributing
 
