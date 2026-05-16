@@ -42,14 +42,16 @@ This is a Next.js 16 project with plans to deploy to Vercel and use Vercel Queue
 for creating timesheet entries.
 
 ### Frontend
-The project uses Shadcn for styling and Tanstack Query for data fetching. Because
-this project will primarily be behind an auth wall we will *not* make use of 
+The project uses Tailwind & Shadcn (suprise) for styling.
+Tanstack Query for data fetching. 
+Because this project will primarily be behind an auth wall we will *not* make use of 
 server components. Nuqs has also been included for type safe router parameter use.
 
 ### Backend
-Whether we will use oRPC or API endpoints is still TBD but we are centering the
-project around error management using Neverthrow. try-catch is banned in this
-codebase.
+Whether we will use oRPC or API endpoints is still TBD 
+We are centering the project around error management using Neverthrow. try-catch 
+is banned in this codebase. 
+T3 Env is used for type safe env management and dotenvx is used for env injection.
 
 ### Testing
 This project uses vitest with the storybook integration so that frontend tests
