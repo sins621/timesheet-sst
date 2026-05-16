@@ -1,6 +1,6 @@
 import nock from "nock";
 import { it, describe, expect } from "vitest";
-import { getProjects, getPaginatedProjects } from "./jira";
+import { getJiraProjects, getJiraPaginatedProjects } from "./jira";
 import {
   exampleProject,
   exampleProjectPaginatedSearchResult,
@@ -22,7 +22,7 @@ describe("getProjects", async () => {
       .matchHeader("Authorization", TEST_AUTH_HEADERS)
       .reply(200, testProjects);
 
-    const result = await getProjects(authHeaders);
+    const result = await getJiraProjects(authHeaders);
     if (result.isErr()) {
       throw new Error(result.error.type);
     }
@@ -44,7 +44,7 @@ describe("getProjectsPaginated", async () => {
       .matchHeader("Authorization", TEST_AUTH_HEADERS)
       .reply(200, testPaginatedProjectsResult);
 
-    const result = await getPaginatedProjects(authHeaders);
+    const result = await getJiraPaginatedProjects(authHeaders);
 
     if (result.isErr()) {
       throw new Error(result.error.type);
@@ -66,7 +66,7 @@ describe("getProjectsPaginated", async () => {
       .matchHeader("Authorization", TEST_AUTH_HEADERS)
       .reply(200, exampleQueriedProjectPaginatedSearchResult);
 
-    const result = await getPaginatedProjects(authHeaders, { query: QUERY });
+    const result = await getJiraPaginatedProjects(authHeaders, { query: QUERY });
 
     if (result.isErr()) {
       if (result.error.type === "ValidationError")

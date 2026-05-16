@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { COST_CODE_IDS } from "../constants/warp";
+import { WARP_COST_CODE_IDS } from "../constants/warp";
 
 export const warpTokenResponseSchema = z.object({
   token: z.string(),
@@ -10,7 +10,7 @@ export const warpEmailSchema = z
   .email({ pattern: warpDomainRegex })
   .brand<"warpEmail">();
 export const warpApiBool = z.union([z.literal(0), z.literal(1)]);
-export const warpCostCodeIDSchema = z.enum(COST_CODE_IDS);
+export const warpCostCodeIDSchema = z.enum(WARP_COST_CODE_IDS);
 
 export const warpTimeSchema = z.iso
   .datetime({ local: true })

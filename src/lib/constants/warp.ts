@@ -1,6 +1,6 @@
 import { urlSchema } from "../schemas/common";
 
-export const COST_CODE_IDS: Record<string, number> = {
+export const WARP_COST_CODE_IDS: Record<string, number> = {
   Consulting: 1,
   softwareDevelopment: 2,
   graphicDesign: 3,
@@ -48,19 +48,19 @@ export const COST_CODE_IDS: Record<string, number> = {
   planningAndDesign: 61,
 } as const;
 
-export const API_URL = "https://office.warpdevelopment.com/api/";
+export const WARP_API_URL = "https://office.warpdevelopment.com/api/";
 
-export const ENDPOINTS = {
+export const WARP_ENDPOINTS = {
   me: {
     method: "GET",
-    url: urlSchema.parse(API_URL + "users/me"),
+    url: urlSchema.parse(WARP_API_URL + "users/me"),
   },
   getProjects: {
     method: "GET",
-    url: urlSchema.parse(API_URL + "Project"),
+    url: urlSchema.parse(WARP_API_URL + "Project"),
   },
   authorise: {
     method: "POST",
-    url: urlSchema.parse(API_URL + "account/authorise"),
+    url: urlSchema.parse(WARP_API_URL + "account/authorise"),
   },
 };

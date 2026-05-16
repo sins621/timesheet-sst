@@ -2,14 +2,14 @@ import * as Errors from "@/lib/constants/errors/infraError";
 import { got } from "got";
 import { err, ok, ResultAsync } from "neverthrow";
 import {
-  ENDPOINTS as jiraEndpoints,
-  ProjectPaginatedSearchParams,
+  JIRA_ENDPOINTS as jiraEndpoints,
+  JiraProjectPaginatedSearchParams,
 } from "../constants/jira";
 import { jiraProjectPaginatedSearchSchema, jiraProjectSchema } from "../schemas/jira";
 import type { ApiRequest, AuthHeaders } from "../types/common";
 import type { JiraProject, JiraProjectPaginatedSearch } from "../types/jira";
 
-export const getProjects = (
+export const getJiraProjects = (
   authHeaders: AuthHeaders,
 ): ResultAsync<JiraProject[], Errors.InfraError> =>
   ResultAsync.fromPromise(
@@ -25,9 +25,9 @@ export const getProjects = (
     return ok(parsed.data);
   });
 
-export const getPaginatedProjects: ApiRequest<
+export const getJiraPaginatedProjects: ApiRequest<
   JiraProjectPaginatedSearch,
-  ProjectPaginatedSearchParams
+  JiraProjectPaginatedSearchParams
 > = async (authHeaders, searchParams) =>
   ResultAsync.fromPromise(
     got(jiraEndpoints.projectPaginatedSearch.url, {

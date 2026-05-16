@@ -1,6 +1,6 @@
 import { describe, it, expect } from "vitest";
 import nock from "nock";
-import { getAuthToken, getProjects } from "./warp";
+import { getWarpAuthToken, getWarpProjects } from "./warp";
 import { warpEmailSchema } from "../schemas/warp";
 import { constructBearerAuthHeaders } from "./common";
 
@@ -17,7 +17,7 @@ describe("getAuthToken", async () => {
       })
       .reply(200, correctResponse);
 
-    const result = await getAuthToken(testEmail, testPassword);
+    const result = await getWarpAuthToken(testEmail, testPassword);
 
     expect(result.isOk()).toBe(true);
 
@@ -38,7 +38,7 @@ describe("getAuthToken", async () => {
       })
       .replyWithError("Network failure");
 
-    const result = await getAuthToken(testEmail, testPassword);
+    const result = await getWarpAuthToken(testEmail, testPassword);
     expect(result.isErr()).toBe(true);
   });
   it("should return an error result if parsing fails", async () => {
@@ -52,7 +52,7 @@ describe("getAuthToken", async () => {
       })
       .reply(200, { someNonsense: "" });
 
-    const result = await getAuthToken(testEmail, testPassword);
+    const result = await getWarpAuthToken(testEmail, testPassword);
     expect(result.isErr()).toBe(true);
   });
 });
@@ -93,7 +93,7 @@ describe("getProjects", async () => {
       .matchHeader("Authorization", `Bearer ${testToken}`)
       .reply(200, correctResponse);
 
-    const result = await getProjects(authHeaders);
+    const result = await getWarpProjects(authHeaders);
 
     if (result.isErr()) {
       throw new Error(result.error.type);
@@ -110,7 +110,7 @@ describe("getProjects", async () => {
       .matchHeader("Authorization", `Bearer ${testToken}`)
       .replyWithError("Network failure");
 
-    const result = await getProjects(authHeaders);
+    const result = await getWarpProjects(authHeaders);
     expect(result.isErr()).toBe(true);
   });
   it("should return an error result if parsing fails", async () => {
@@ -122,7 +122,7 @@ describe("getProjects", async () => {
       .matchHeader("Authorization", `Bearer ${testToken}`)
       .reply(200, { someNonsense: "" });
 
-    const result = await getProjects(authHeaders);
+    const result = await getWarpProjects(authHeaders);
     expect(result.isErr()).toBe(true);
   });
 });
