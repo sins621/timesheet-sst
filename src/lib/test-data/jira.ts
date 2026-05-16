@@ -1,5 +1,5 @@
 import { faker } from "@faker-js/faker";
-import type { Project, ProjectPaginatedSearch } from "../types/jira";
+import type { JiraProject, JiraProjectPaginatedSearch } from "../types/jira";
 import { getTestData } from "./common";
 
 const FIELDS = [
@@ -12,7 +12,7 @@ const FIELDS = [
   "insight",
 ];
 
-export const exampleProject = (overrides?: Partial<Project>) => ({
+export const exampleProject = (overrides?: Partial<JiraProject>) => ({
   ...{
     expand: faker.helpers
       .arrayElements(FIELDS, { min: 1, max: FIELDS.length })
@@ -43,7 +43,7 @@ export const exampleProject = (overrides?: Partial<Project>) => ({
 });
 
 export const exampleProjectPaginatedSearchResult = (
-  overrides?: Partial<ProjectPaginatedSearch>,
+  overrides?: Partial<JiraProjectPaginatedSearch>,
 ) => ({
   ...{
     self: faker.internet.url(),
@@ -58,7 +58,7 @@ export const exampleProjectPaginatedSearchResult = (
 });
 
 export const exampleQueriedProjectPaginatedSearchResult = (
-  overrides?: Partial<ProjectPaginatedSearch>,
+  overrides?: Partial<JiraProjectPaginatedSearch>,
 ) => ({
   ...{
     self: "https://warpdevelopment.atlassian.net/rest/api/3/project/search?maxResults=50&query=lumix&startAt=0",

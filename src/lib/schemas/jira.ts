@@ -1,27 +1,27 @@
 import { z } from "zod";
 
-export const avatarUrlsSchema = z.object({
+export const jiraAvatarUrlsSchema = z.object({
   "48x48": z.url(),
   "24x24": z.url(),
   "16x16": z.url(),
   "32x32": z.url(),
 });
 
-export const projectCategorySchema = z.object({
+export const jiraProjectCategorySchema = z.object({
   self: z.url(),
   id: z.union([z.number(), z.string()]),
   name: z.string(),
   description: z.string(),
 });
 
-export const projectSchema = z.object({
+export const jiraProjectSchema = z.object({
   expand: z.string(),
   self: z.url(),
   id: z.union([z.number(), z.string()]),
   key: z.string(),
   name: z.string(),
-  avatarUrls: avatarUrlsSchema,
-  projectCategory: projectCategorySchema.optional(),
+  avatarUrls: jiraAvatarUrlsSchema,
+  projectCategory: jiraProjectCategorySchema.optional(),
   projectTypeKey: z.string(),
   simplified: z.boolean(),
   style: z.string(),
@@ -29,12 +29,12 @@ export const projectSchema = z.object({
   properties: z.object().optional(),
 });
 
-export const projectPaginatedSearchSchema = z.object({
+export const jiraProjectPaginatedSearchSchema = z.object({
   self: z.url(),
   nextPage: z.url().optional(),
   maxResults: z.number(),
   startAt: z.number(),
   total: z.number(),
   isLast: z.boolean(),
-  values: projectSchema.array(),
+  values: jiraProjectSchema.array(),
 });

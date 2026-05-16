@@ -1,20 +1,22 @@
 import { z } from "zod";
 import { COST_CODE_IDS } from "../constants/warp";
 
-export const tokenResponseSchema = z.object({
+export const warpTokenResponseSchema = z.object({
   token: z.string(),
 });
 
-export const domainRegex = /@[A-Za-z]+\.[A-Za-z]+/i;
-export const emailSchema = z
-  .email({ pattern: domainRegex })
+export const warpDomainRegex = /@[A-Za-z]+\.[A-Za-z]+/i;
+export const warpEmailSchema = z
+  .email({ pattern: warpDomainRegex })
   .brand<"warpEmail">();
-export const apiBool = z.union([z.literal(0), z.literal(1)]);
-export const costCodeIDSchema = z.enum(COST_CODE_IDS);
+export const warpApiBool = z.union([z.literal(0), z.literal(1)]);
+export const warpCostCodeIDSchema = z.enum(COST_CODE_IDS);
 
-export const timeSchema = z.iso.datetime({ local: true }).brand<"warpTime">();
+export const warpTimeSchema = z.iso
+  .datetime({ local: true })
+  .brand<"warpTime">();
 
-export const projectClientSchema = z
+export const warpProjectClientSchema = z
   .object({
     GroupId: z.number(),
     Name: z.string(),
@@ -22,27 +24,27 @@ export const projectClientSchema = z
   })
   .brand<"warpProjectClient">();
 
-export const projectSchema = z.
-  object({
+export const warpProjectSchema = z
+  .object({
     TaskId: z.number(),
     Name: z.string(),
     IsActive: z.boolean(),
-    Created_On: timeSchema,
-    Updated_On: timeSchema,
-    Client: projectClientSchema,
+    Created_On: warpTimeSchema,
+    Updated_On: warpTimeSchema,
+    Client: warpProjectClientSchema,
   })
   .brand<"warpProject">();
 
-export const entrySchema = z
+export const warpEntrySchema = z
   .object({
     TaskId: z.number(),
     PersonId: z.number(),
-    CostCodeId: costCodeIDSchema,
+    CostCodeId: warpCostCodeIDSchema,
     DepartmentId: z.number(),
-    Overtime: apiBool,
-    EntryDate: timeSchema,
+    Overtime: warpApiBool,
+    EntryDate: warpTimeSchema,
     Comments: z.string(),
-    WorkLogId: apiBool,
-    Audited: apiBool,
+    WorkLogId: warpApiBool,
+    Audited: warpApiBool,
   })
   .brand<"warpEntry">();

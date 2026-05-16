@@ -5,20 +5,20 @@ import {
   ENDPOINTS as jiraEndpoints,
   ProjectPaginatedSearchParams,
 } from "../constants/jira";
-import { projectPaginatedSearchSchema, projectSchema } from "../schemas/jira";
+import { jiraProjectPaginatedSearchSchema, jiraProjectSchema } from "../schemas/jira";
 import type { ApiRequest, AuthHeaders } from "../types/common";
-import type { Project, ProjectPaginatedSearch } from "../types/jira";
+import type { JiraProject, JiraProjectPaginatedSearch } from "../types/jira";
 
 export const getProjects = (
   authHeaders: AuthHeaders,
-): ResultAsync<Project[], Errors.InfraError> =>
+): ResultAsync<JiraProject[], Errors.InfraError> =>
   ResultAsync.fromPromise(
     got(jiraEndpoints.projectSearch.url, {
       headers: authHeaders,
     }).json(),
     (e) => Errors.externalServiceError("Jira Endpoint", e as Error),
   ).andThen((response) => {
-    const parsed = projectSchema.array().safeParse(response);
+    const parsed = jiraProjectSchema.array().safeParse(response);
 
     if (!parsed.success) return err(Errors.validationError(parsed.error));
 
@@ -26,7 +26,7 @@ export const getProjects = (
   });
 
 export const getPaginatedProjects: ApiRequest<
-  ProjectPaginatedSearch,
+  JiraProjectPaginatedSearch,
   ProjectPaginatedSearchParams
 > = async (authHeaders, searchParams) =>
   ResultAsync.fromPromise(
@@ -36,7 +36,7 @@ export const getPaginatedProjects: ApiRequest<
     }).json(),
     (e) => Errors.externalServiceError("Jira Endpoint", e as Error),
   ).andThen((response) => {
-    const parsed = projectPaginatedSearchSchema.safeParse(response);
+    const parsed = jiraProjectPaginatedSearchSchema.safeParse(response);
 
     if (!parsed.success) return err(Errors.validationError(parsed.error));
 

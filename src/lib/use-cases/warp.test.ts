@@ -1,12 +1,12 @@
 import { describe, it, expect } from "vitest";
 import nock from "nock";
 import { getAuthToken, getProjects } from "./warp";
-import { emailSchema } from "../schemas/warp";
+import { warpEmailSchema } from "../schemas/warp";
 import { constructBearerAuthHeaders } from "./common";
 
 describe("getAuthToken", async () => {
   it("should return a token ", async () => {
-    const testEmail = emailSchema.parse("some@email.com");
+    const testEmail = warpEmailSchema.parse("some@email.com");
     const testPassword = "someTestPassword";
     const correctResponse = { token: "someToken" };
 
@@ -28,7 +28,7 @@ describe("getAuthToken", async () => {
     expect(result.value).toEqual(correctResponse.token);
   });
   it("should return an error result if request fails", async () => {
-    const testEmail = emailSchema.parse("some@email.com");
+    const testEmail = warpEmailSchema.parse("some@email.com");
     const testPassword = "someTestPassword";
 
     nock("https://office.warpdevelopment.com")
@@ -42,7 +42,7 @@ describe("getAuthToken", async () => {
     expect(result.isErr()).toBe(true);
   });
   it("should return an error result if parsing fails", async () => {
-    const testEmail = emailSchema.parse("some@email.com");
+    const testEmail = warpEmailSchema.parse("some@email.com");
     const testPassword = "someTestPassword";
 
     nock("https://office.warpdevelopment.com")

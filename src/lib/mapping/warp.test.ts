@@ -1,40 +1,40 @@
 import { describe, expect, it } from "vitest";
 import {
-  projectClientSchema,
-  projectSchema,
-  timeSchema,
+  warpProjectClientSchema,
+  warpProjectSchema,
+  warpTimeSchema,
 } from "../schemas/warp";
-import type { Project, ProjectView } from "../types/warp";
-import { mapProjectsToProjectViews } from "./warp";
+import type { WarpProject, WarpProjectView } from "../types/warp";
+import { mapWarpProjectsToWarpProjectViews } from "./warp";
 
 describe("mapProjectsToProjectViews", () => {
   it("should map an array of Projects to an array of Project Views", () => {
-    const testProjectA: Project = projectSchema.parse({
+    const testProjectA: WarpProject = warpProjectSchema.parse({
       TaskId: 3,
       Name: "Some Project Name",
       IsActive: true,
-      Created_On: timeSchema.parse("2007-01-10T14:49:26.093"),
-      Updated_On: timeSchema.parse("2007-01-10T14:49:26.093"),
-      Client: projectClientSchema.parse({
+      Created_On: warpTimeSchema.parse("2007-01-10T14:49:26.093"),
+      Updated_On: warpTimeSchema.parse("2007-01-10T14:49:26.093"),
+      Client: warpProjectClientSchema.parse({
         GroupId: 145,
         Name: "Test Client",
         Currency: "Some Currency",
       }),
     });
-    const testProjectB: Project = projectSchema.parse({
+    const testProjectB: WarpProject = warpProjectSchema.parse({
       TaskId: 56,
       Name: "Some Other Project Name",
       IsActive: true,
-      Created_On: timeSchema.parse("2007-01-10T14:49:26.093"),
-      Updated_On: timeSchema.parse("2007-01-10T14:49:26.093"),
-      Client: projectClientSchema.parse({
+      Created_On: warpTimeSchema.parse("2007-01-10T14:49:26.093"),
+      Updated_On: warpTimeSchema.parse("2007-01-10T14:49:26.093"),
+      Client: warpProjectClientSchema.parse({
         GroupId: 145,
         Name: "Test Client",
         Currency: "Some Currency",
       }),
     });
 
-    const expectedMappedResult: ProjectView[] = [
+    const expectedMappedResult: WarpProjectView[] = [
       {
         name: "Test Client",
         currency: "Some Currency",
@@ -56,7 +56,7 @@ describe("mapProjectsToProjectViews", () => {
       },
     ];
 
-    const mappedProjects = mapProjectsToProjectViews([
+    const mappedProjects = mapWarpProjectsToWarpProjectViews([
       testProjectA,
       testProjectB,
     ]);
@@ -64,44 +64,44 @@ describe("mapProjectsToProjectViews", () => {
     expect(mappedProjects).toEqual(expectedMappedResult);
   });
   it("should group clients with the same name together", () => {
-    const testProjectA: Project = projectSchema.parse({
+    const testProjectA: WarpProject = warpProjectSchema.parse({
       TaskId: 3,
       Name: "Some Project Name",
       IsActive: true,
-      Created_On: timeSchema.parse("2007-01-10T14:49:26.093"),
-      Updated_On: timeSchema.parse("2007-01-10T14:49:26.093"),
-      Client: projectClientSchema.parse({
+      Created_On: warpTimeSchema.parse("2007-01-10T14:49:26.093"),
+      Updated_On: warpTimeSchema.parse("2007-01-10T14:49:26.093"),
+      Client: warpProjectClientSchema.parse({
         GroupId: 145,
         Name: "Test Client",
         Currency: "Some Currency",
       }),
     });
-    const testProjectB: Project = projectSchema.parse({
+    const testProjectB: WarpProject = warpProjectSchema.parse({
       TaskId: 56,
       Name: "Some Other Project Name",
       IsActive: true,
-      Created_On: timeSchema.parse("2007-01-10T14:49:26.093"),
-      Updated_On: timeSchema.parse("2007-01-10T14:49:26.093"),
-      Client: projectClientSchema.parse({
+      Created_On: warpTimeSchema.parse("2007-01-10T14:49:26.093"),
+      Updated_On: warpTimeSchema.parse("2007-01-10T14:49:26.093"),
+      Client: warpProjectClientSchema.parse({
         GroupId: 145,
         Name: "Test Client",
         Currency: "Some Currency",
       }),
     });
-    const testProjectC: Project = projectSchema.parse({
+    const testProjectC: WarpProject = warpProjectSchema.parse({
       TaskId: 56,
       Name: "Some Other Project Name",
       IsActive: true,
-      Created_On: timeSchema.parse("2007-01-10T14:49:26.093"),
-      Updated_On: timeSchema.parse("2007-01-10T14:49:26.093"),
-      Client: projectClientSchema.parse({
+      Created_On: warpTimeSchema.parse("2007-01-10T14:49:26.093"),
+      Updated_On: warpTimeSchema.parse("2007-01-10T14:49:26.093"),
+      Client: warpProjectClientSchema.parse({
         GroupId: 145,
         Name: "A different client",
         Currency: "Some Currency",
       }),
     });
 
-    const expectedMappedResult: ProjectView[] = [
+    const expectedMappedResult: WarpProjectView[] = [
       {
         name: "Test Client",
         currency: "Some Currency",
@@ -136,7 +136,7 @@ describe("mapProjectsToProjectViews", () => {
       },
     ];
 
-    const mappedProjects = mapProjectsToProjectViews([
+    const mappedProjects = mapWarpProjectsToWarpProjectViews([
       testProjectA,
       testProjectB,
       testProjectC,

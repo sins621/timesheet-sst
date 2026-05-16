@@ -1,14 +1,14 @@
 import {
-  avatarUrlsSchema,
-  projectCategorySchema,
-  projectPaginatedSearchSchema,
-  projectSchema,
+  jiraAvatarUrlsSchema,
+  jiraProjectCategorySchema,
+  jiraProjectPaginatedSearchSchema,
+  jiraProjectSchema,
 } from "../schemas/jira";
 import { z } from "zod";
 
-export type AvatarUrls = z.infer<typeof avatarUrlsSchema>;
-export type ProjectCategory = z.infer<typeof projectCategorySchema>;
-export type Project = z.infer<typeof projectSchema>;
-export type ProjectPaginatedSearch = z.infer<
-  typeof projectPaginatedSearchSchema
+export type JiraAvatarUrls = z.infer<typeof jiraAvatarUrlsSchema>;
+export type JiraProjectCategory = z.infer<typeof jiraProjectCategorySchema>;
+export type JiraProject = z.infer<typeof jiraProjectSchema>;
+export type JiraProjectPaginatedSearch = z.infer<
+  typeof jiraProjectPaginatedSearchSchema
 >;

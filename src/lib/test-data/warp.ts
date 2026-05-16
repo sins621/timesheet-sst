@@ -1,9 +1,9 @@
 import { faker } from "@faker-js/faker";
-import type { Project, ProjectClient } from "../types/warp";
+import type { WarpProject, WarpProjectClient } from "../types/warp";
 
 const CURRENCIES = ["South African Rand", "Great Britain Pound", "US Dollar"];
 
-export const exampleClient = (overrides?: Partial<ProjectClient>) => ({
+export const exampleClient = (overrides?: Partial<WarpProjectClient>) => ({
   ...{
     GroupId: faker.number.int({ min: 0, max: 9 }),
     Name: faker.lorem.word(),
@@ -12,7 +12,7 @@ export const exampleClient = (overrides?: Partial<ProjectClient>) => ({
   ...overrides,
 });
 
-export const exampleProject = (overrides?: Partial<Project>) => ({
+export const exampleProject = (overrides?: Partial<WarpProject>) => ({
   ...{
     TaskId: faker.number.int({ min: 0, max: 9 }),
     Name: faker.lorem.word(),

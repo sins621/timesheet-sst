@@ -1,7 +1,9 @@
-import type { Project, ProjectView } from "../types/warp";
+import type { WarpProject, WarpProjectView } from "../types/warp";
 
-export function mapProjectsToProjectViews(projects: Project[]): ProjectView[] {
-  const map = new Map<string, ProjectView>();
+export function mapWarpProjectsToWarpProjectViews(
+  projects: WarpProject[],
+): WarpProjectView[] {
+  const map = new Map<string, WarpProjectView>();
 
   for (const project of projects) {
     const key = project.Client.Name;

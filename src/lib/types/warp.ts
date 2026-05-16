@@ -1,24 +1,24 @@
 import { z } from "zod";
 import {
-  costCodeIDSchema,
-  emailSchema,
-  entrySchema,
-  projectClientSchema,
-  projectSchema,
-  timeSchema,
+  warpCostCodeIDSchema,
+  warpEmailSchema,
+  warpEntrySchema,
+  warpProjectClientSchema,
+  warpProjectSchema,
+  warpTimeSchema,
 } from "../schemas/warp";
 
-export type CostCodeID = z.infer<typeof costCodeIDSchema>;
-export type WarpTime = z.infer<typeof timeSchema>;
+export type WarpCostCodeID = z.infer<typeof warpCostCodeIDSchema>;
+export type WarpTime = z.infer<typeof warpTimeSchema>;
 
-export type ProjectClient = z.infer<typeof projectClientSchema>;
-export type Project = z.infer<typeof projectSchema>;
+export type WarpProjectClient = z.infer<typeof warpProjectClientSchema>;
+export type WarpProject = z.infer<typeof warpProjectSchema>;
 
-export type Entry = z.infer<typeof entrySchema>;
+export type WarpEntry = z.infer<typeof warpEntrySchema>;
 
-export type WarpEmail = z.infer<typeof emailSchema>;
+export type WarpEmail = z.infer<typeof warpEmailSchema>;
 
-export type ProjectView = {
+export type WarpProjectView = {
   name: string;
   groupId: number;
   currency: string;
