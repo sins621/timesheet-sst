@@ -13,8 +13,9 @@ export const env = createEnv({
     ATLASSIAN_CLIENT_ID: z.string().min(1),
     ATLASSIAN_CLIENT_SECRET: z.string().min(1),
     APP_ENV: z.string().min(1),
-    WARP_TEST_USERNAME: warpEmailSchema,
-    WARP_TEST_PASSWORD: z.string().min(1),
+    WARP_TEST_USERNAME: warpEmailSchema.optional(),
+    WARP_TEST_PASSWORD: z.string().min(1).optional(),
+    USE_MSW: z.boolean().optional()
   },
   client: {
     NEXT_PUBLIC_ENABLE_MSW_MOCK: z.coerce.boolean(),
@@ -32,5 +33,6 @@ export const env = createEnv({
     NEXT_PUBLIC_ENABLE_MSW_MOCK: process.env.NEXT_PUBLIC_ENABLE_MSW_MOCK,
     WARP_TEST_USERNAME: process.env.WARP_TEST_USERNAME,
     WARP_TEST_PASSWORD: process.env.WARP_TEST_PASSWORD,
+    USE_MSW: process.env.USE_MSW
   },
 });

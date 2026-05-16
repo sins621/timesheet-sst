@@ -13,7 +13,7 @@ export default function Page() {
           const tokenResult = await getTokenAction();
 
           if (!tokenResult.success)
-            return toast.error("Failed to fetch token, check console");
+            return toast.error(tokenResult.error);
 
           setToken(tokenResult.data);
         }}
