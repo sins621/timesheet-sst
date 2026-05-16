@@ -32,5 +32,29 @@ viewable [here](https://app.fizzy.do/6200411/public/boards/HnAkwSq5KsHCeVzEA7JV7
 ## Contributing
 
 Please see the Fizzy link for issues and if you would like to get involved you're
-welcome to message me on teams to get access to the Fizzy board and indicate that
-you are working on issues.
+welcome to message me on Teams to get access to the Fizzy board and indicate that
+you are working on issues. *Please note:* no slop allowed.
+
+## Stack
+
+### Core
+This is a Next.js 16 project with plans to deploy to Vercel and use Vercel Queues
+for creating timesheet entries.
+
+### Frontend
+The project uses Shadcn for styling and Tanstack Query for data fetching. Because
+this project will primarily be behind an auth wall we will *not* make use of 
+server components. Nuqs has also been included for type safe router parameter use.
+
+### Backend
+Whether we will use oRPC or API endpoints is still TBD but we are centering the
+project around error management using Neverthrow. try-catch is banned in this
+codebase.
+
+### Testing
+This project uses vitest with the storybook integration so that frontend tests
+can run inside of playwright. For mocking endpoints, the project incorporates 
+Mock Service Worker.
+
+## Style
+Read the room.
