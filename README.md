@@ -37,6 +37,8 @@ this repository.
 Please see the current [issues](https://github.com/sins621/timesheet-sst/issues) or [discussions](https://github.com/sins621/timesheet-sst/discussions) for the project and indicate by commenting that you would
 like to contribute to these issues then simply open up pull requests.
 
+Please see the [Documentation](./docs/) section for style guides, architecture guidelines, etc.
+
 ### Getting up and running.
 - Clone the project
 - Run `pnpm i`
