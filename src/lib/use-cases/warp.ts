@@ -1,7 +1,11 @@
-import * as Errors from "@/lib/constants/errors/infraError";
+import {
+  type InfraError,
+  externalServiceError,
+  validationError,
+} from "@/lib/constants/errors/infraError";
 import { got } from "got";
 import { ResultAsync, err, ok } from "neverthrow";
-import { WARP_ENDPOINTS  } from "../constants/warp";
+import { WARP_ENDPOINTS } from "../constants/warp";
 import { warpProjectSchema, warpTokenResponseSchema } from "../schemas/warp";
 import type { AuthHeaders } from "../types/common";
 import type { WarpProject, WarpEmail } from "../types/warp";
@@ -9,7 +13,7 @@ import type { WarpProject, WarpEmail } from "../types/warp";
 export const getWarpAuthToken = (
   email: WarpEmail,
   password: string,
-): ResultAsync<string, Errors.InfraError> =>
+): ResultAsync<string, InfraError> =>
   ResultAsync.fromPromise(
     got
       .post(WARP_ENDPOINTS.authorise.url, {
@@ -19,27 +23,27 @@ export const getWarpAuthToken = (
         },
       })
       .json(),
-    (e) => Errors.externalServiceError("Warp Endpoint", e as Error),
+    (e) => externalServiceError("Warp Endpoint", e as Error),
   ).andThen((response) => {
     const parsed = warpTokenResponseSchema.safeParse(response);
 
-    if (!parsed.success) return err(Errors.validationError(parsed.error));
+    if (!parsed.success) return err(validationError(parsed.error));
 
     return ok(parsed.data.token);
   });
 
 export const getWarpProjects = (
   authHeaders: AuthHeaders,
-): ResultAsync<WarpProject[], Errors.InfraError> =>
+): ResultAsync<WarpProject[], InfraError> =>
   ResultAsync.fromPromise(
     got(WARP_ENDPOINTS.getProjects.url, {
       headers: authHeaders,
     }).json(),
-    (e) => Errors.externalServiceError("Warp Endpoint", e as Error),
+    (e) => externalServiceError("Warp Endpoint", e as Error),
   ).andThen((response) => {
     const parsed = warpProjectSchema.array().safeParse(response);
 
-    if (!parsed.success) return err(Errors.validationError(parsed.error));
+    if (!parsed.success) return err(validationError(parsed.error));
 
     return ok(parsed.data);
   });
