@@ -5,6 +5,7 @@ export type User = {
   image: string;
   timestamp: Date;
   createdAt: Date;
+  warpAuth: WarpAuth;
   projects: WarpProject[];
   boards: Board[];
   projectBoards: ProjectBoard[];
@@ -41,10 +42,26 @@ export type ProjectBoard = {
   project: WarpProject;
 };
 
-export type WarpAuth = {
-  password?: string;
+// B.C. The implication here is we need to use their password to retry in case
+// auth fails and so we can offer to store their warp password so that we can
+// generate new tokens if the token fails.
+export enum WarpAuthType {
+  PasswordStored,
+  PasswordNotStored,
+}
+
+export type WarpAuthStored = {
+  type: WarpAuthType.PasswordStored;
+  password: string;
   token: string;
 };
+
+export type WarpAuthUnstored = {
+  type: WarpAuthType.PasswordNotStored;
+  token: string;
+};
+
+export type WarpAuth = WarpAuthStored | WarpAuthUnstored;
 
 export type JiraAuth = {
   token: string;
