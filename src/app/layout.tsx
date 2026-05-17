@@ -1,10 +1,9 @@
+import { AppProviders } from "@/components/providers/app-providers";
+import { cn } from "@/lib/utils";
+import { isMSWEnabled } from "@/lib/utils/is-MSW-enabled";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
-import { AppProviders } from "@/components/providers/app-providers";
-import { cn } from "@/lib/utils";
-import { env } from "@/env";
-import { isMSWEnabled } from "@/lib/utils/isMSWEnabled";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
