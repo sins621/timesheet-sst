@@ -7,7 +7,7 @@ import {
   exampleQueriedProjectPaginatedSearchResult,
 } from "../test-data/jira";
 import { getTestData } from "../test-data/common";
-import { constructBasicAuthHeaders } from "./common";
+import { constructBasicAuthHeaders } from "../utils/common";
 
 describe("getProjects", async () => {
   it("it should return an array of projects", async () => {

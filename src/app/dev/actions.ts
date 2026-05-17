@@ -1,7 +1,7 @@
 "use server";
 
 import { env } from "@/env";
-import { getWarpAuthToken } from "@/lib/use-cases/warp";
+import { getWarpAuthToken } from "@/lib/external/warp";
 
 export const getTokenAction = async () => {
   if (!env.WARP_TEST_USERNAME)
