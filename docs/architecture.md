@@ -37,3 +37,7 @@ or import mocking with Vitest to achieve mocks for infrastructure where applicab
 I can't figure out a way to support DI in a functional paradigmn that doesn't involve
 heavy passing of functions as parameters down the layers but if anyone has any
 suggestions I am happy to hear them.
+
+## The biggest rule
+
+Keep **IO** and **Business Logic** seperate.
