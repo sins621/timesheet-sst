@@ -71,3 +71,23 @@ be suitable to enter a timesheet entry in to. For example, there is 'Development
 and 'Discovery - Planning and Architecture'. It might be useful to submit tickets
 under multiple but I think for now we will just simply go Board -> Warp Project
 (which is a child of a customer.)
+
+## Recap
+
+So let's recap for our user. They should have many Boards, many Projects and
+we should have a table that links Projects to Boards. Using this link, we will
+query the Boards for tickets for that day, filter them down into the different
+stub types, create messages using the message templates associated with those
+stub types, and then add those messages on to a queue that submits timesheet
+entries to a Warp Project that is linked to the Board. Seems simple enough?
+
+![Entity Relationships](./images/entity-relationships.png)
+
+In the picture above I've created a rough mental model of the entity relationships
+for these different concepts related back to the user. The arrows represent what
+would be 'foreign keys' in a relational database. The only part here I'm not 
+entirely sure of is who should 'own' stubs because I can image a scenario where
+you have multiple boards and the message templates you create would be the same
+for all of them. The only difference is we would need to keep a record of the 
+status IDs that map to these conditions. We could instead reference a table that
+holds a collection of starting, ending and stationary IDs but I'm not sure.
