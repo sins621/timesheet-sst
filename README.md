@@ -34,9 +34,8 @@ this repository.
 
 ## Contributing
 
-Please see the Fizzy link for issues and if you would like to get involved you're
-welcome to message me on Teams to get access to the Fizzy board and indicate that
-you are working on issues. *Please note:* no slop allowed.
+Please see the current [issues](https://github.com/sins621/timesheet-sst/issues) or [discussions](https://github.com/sins621/timesheet-sst/discussions) for the project and indicate by commenting that you would
+like to contribute to these issues then simply open up pull requests.
 
 ## Stack
 
