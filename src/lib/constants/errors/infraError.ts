@@ -36,11 +36,6 @@ export const unauthorized = (reason?: string): InfraError => ({
   reason,
 });
 
-export const forbidden = (reason?: string): InfraError => ({
-  type: "Forbidden",
-  reason,
-});
-
 export const validationError = (error: Error): InfraError => ({
   type: "ValidationError",
   error,
