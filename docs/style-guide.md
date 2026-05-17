@@ -7,3 +7,6 @@
 - The project uses 'PascalCase' for Type names.
 - The project uses 'ALL_CAPS' for constant names.
 - All functions are to be exported as constants containing thunks `() => {}` with the exception of components because Next.js requires routes to export default functions for root route components and I don't want to do `const SomeComponent = () => {}` and then `exoprt default SomeComponent` or whatever the syntax is.
+- In most cases we should strive to strictly define the return types for functions.
+- All functions that can throw errors must instead return error constants using neverthrow.
+- Neverthrow is as much part of the syntax of this project as TypeScript itself and so you must endeavour to make maximum use of the functions provided by neverthrow to accomplish what you need to do on this project. See the [repo](https://github.com/supermacro/neverthrow)
