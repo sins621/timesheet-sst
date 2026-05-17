@@ -4,6 +4,7 @@ import "./globals.css";
 import { AppProviders } from "@/components/providers/app-providers";
 import { cn } from "@/lib/utils";
 import { env } from "@/env";
+import { isMSWEnabled } from "@/lib/utils/isMSWEnabled";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -17,7 +18,7 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-if (process.env.NEXT_RUNTIME === "nodejs" && env.USE_MSW === true) {
+if (process.env.NEXT_RUNTIME === "nodejs" && isMSWEnabled()) {
   const { server } = require("@/mocks/node");
   server.listen();
 }
