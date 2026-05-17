@@ -4,16 +4,26 @@ export type User = {
   emailVerified: boolean;
   image: string;
   timestamp: Date;
+  createdAt: Date;
   projects: WarpProject[];
   boards: Board[];
+  projectBoards: ProjectBoard[];
 };
 
 export enum BoardPlatform {
-  Jira = "jira",
+  Jira,
 }
+
+export type BoardStatus = {
+  id: string;
+  boardId: string;
+  title: string;
+};
 
 export type Board = {
   id: string;
+  platform: BoardPlatform;
+  statuses: BoardStatus[];
 };
 
 export type WarpCustomer = {
@@ -23,6 +33,12 @@ export type WarpCustomer = {
 
 export type WarpProject = {
   id: string;
+};
+
+export type ProjectBoard = {
+  id: string;
+  board: Board;
+  project: WarpProject;
 };
 
 export type WarpAuth = {
@@ -35,22 +51,28 @@ export type JiraAuth = {
 };
 
 export enum TicketType {
-  Stationary = 0,
-  Transitioned = 1,
+  Stationary,
+  Transitioned,
 }
+
+export type MessageTemplate = {
+  id: string;
+  text: string;
+};
 
 export type StationaryStub = {
   id: string;
   type: TicketType.Stationary;
-  statusId: string;
-  messageTemplateId: string;
+  status: BoardStatus;
+  messageTemplate: MessageTemplate;
 };
 
 export type TransitionedStub = {
   id: string;
   type: TicketType.Transitioned;
-  startingStatusId: string;
-  endingStatusId: string;
+  startingStatus: BoardStatus;
+  endingStatus: BoardStatus;
+  messageTemplate: MessageTemplate;
 };
 
 export type Stub = StationaryStub | TransitionedStub;
