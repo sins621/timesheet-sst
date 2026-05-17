@@ -26,4 +26,16 @@ export type ApiRequest<TResponse, TParams> = (
 export type OptionItem = {
   label: string;
   value: string;
-}
+};
+
+// B.C. This type is used for server action responses or any situation where
+// we  are unable to serialze neverthrow objects over the wire
+export type ActionResult =
+  | { success: true }
+  | { success: false; error: string };
+
+// B.C. This type is used for server action responses or any situation where
+// we  are unable to serialze neverthrow objects over the wire
+export type ActionDataResult<T> =
+  | { success: true; data: T }
+  | { success: false; error: string };
