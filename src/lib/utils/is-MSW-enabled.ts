@@ -39,7 +39,7 @@ import { env } from "@/env";
  * process.env.APP_ENV = 'development'
  * isMSWEnabled() // returns false
  */
-export function isMSWEnabled(): boolean {
+export const isMSWEnabled = (): boolean => {
   // Client-side: only check NEXT_PUBLIC_ENABLE_MSW_MOCK
   // This simpler check prevents hydration mismatches between server and client
   // The client can't access server-only env vars like APP_ENV
@@ -54,4 +54,4 @@ export function isMSWEnabled(): boolean {
     env.NEXT_PUBLIC_ENABLE_MSW_MOCK === true &&
     (env.APP_ENV === "test" || process.env.NODE_ENV === "test")
   );
-}
+};

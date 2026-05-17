@@ -1,8 +1,8 @@
 import type { WarpProject, WarpProjectView } from "../types/warp";
 
-export function mapWarpProjectsToWarpProjectViews(
+export const mapWarpProjectsToWarpProjectViews = (
   projects: WarpProject[],
-): WarpProjectView[] {
+): WarpProjectView[] => {
   const map = new Map<string, WarpProjectView>();
 
   for (const project of projects) {
@@ -26,4 +26,4 @@ export function mapWarpProjectsToWarpProjectViews(
   }
 
   return Array.from(map.values());
-}
+};
