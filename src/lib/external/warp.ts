@@ -2,7 +2,7 @@ import {
   type InfraError,
   externalServiceError,
   validationError,
-} from "@/lib/constants/errors/infraError";
+} from "@/lib/constants/errors/infra-errors";
 import { got } from "got";
 import { ResultAsync, err, ok } from "neverthrow";
 import { WARP_ENDPOINTS } from "../constants/warp";

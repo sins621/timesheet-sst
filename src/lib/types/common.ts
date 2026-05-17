@@ -1,7 +1,7 @@
 import { Result } from "neverthrow";
-import { DomainError } from "../constants/errors/domainErrors";
-import { InfraError } from "../constants/errors/infraError";
-import { RouteError } from "../constants/errors/routeErrors";
+import { DomainError } from "../constants/errors/domain-errors";
+import { InfraError } from "../constants/errors/infra-errors";
+import { RouteError } from "../constants/errors/route-errors";
 import { urlSchema } from "../schemas/common";
 import { z } from "zod";
 

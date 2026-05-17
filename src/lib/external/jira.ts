@@ -2,7 +2,7 @@ import {
   type InfraError,
   externalServiceError,
   validationError,
-} from "@/lib/constants/errors/infraError";
+} from "@/lib/constants/errors/infra-errors";
 import { got } from "got";
 import { err, ok, ResultAsync } from "neverthrow";
 import {
