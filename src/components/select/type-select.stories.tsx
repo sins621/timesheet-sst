@@ -27,7 +27,7 @@ export const StationaryClickedTest: Story = {
         name: "Stationary A ticket that has stayed in the same status for the day",
       }),
     );
-    await expect(args.onClick).toHaveBeenCalledWith(TicketType.stationary);
+    await expect(args.onClick).toHaveBeenCalledWith(TicketType.Stationary);
   },
 };
 
@@ -41,6 +41,6 @@ export const TransitionClickedTest: Story = {
         name: "Transitioned A ticket that has moved from one status to another",
       }),
     );
-    await expect(args.onClick).toHaveBeenCalledWith(TicketType.transitioned);
+    await expect(args.onClick).toHaveBeenCalledWith(TicketType.Transitioned);
   },
 };

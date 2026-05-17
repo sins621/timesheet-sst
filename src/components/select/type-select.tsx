@@ -11,12 +11,12 @@ export default function TypeSelect(props: TypeSelectProps) {
       <TypeButton
         title="Stationary"
         description="A ticket that has stayed in the same status for the day"
-        onClick={() => props.onClick(TicketType.stationary)}
+        onClick={() => props.onClick(TicketType.Stationary)}
       />
       <TypeButton
         title="Transitioned"
         description="A ticket that has moved from one status to another"
-        onClick={() => props.onClick(TicketType.transitioned)}
+        onClick={() => props.onClick(TicketType.Transitioned)}
       />
     </div>
   );
