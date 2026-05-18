@@ -1,5 +1,6 @@
 import { relations } from "drizzle-orm";
 import { pgTable, text, timestamp, boolean, index } from "drizzle-orm/pg-core";
+import { v7 } from "uuid";
 
 export const user = pgTable("user", {
   id: text("id").primaryKey(),
@@ -10,6 +11,22 @@ export const user = pgTable("user", {
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at")
     .defaultNow()
+    .$onUpdate(() => /* @__PURE__ */ new Date())
+    .notNull(),
+});
+
+export const warpAuthCredential = pgTable("warp_auth_credentials", {
+  id: text("id")
+    .primaryKey()
+    .$defaultFn(() => v7()),
+  userId: text("user_id")
+    .notNull()
+    .unique()
+    .references(() => user.id, { onDelete: "cascade" }),
+  password: text("password"),
+  token: text("token"),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at")
     .$onUpdate(() => /* @__PURE__ */ new Date())
     .notNull(),
 });
@@ -73,10 +90,24 @@ export const verification = pgTable(
   (table) => [index("verification_identifier_idx").on(table.identifier)],
 );
 
-export const userRelations = relations(user, ({ many }) => ({
+export const userRelations = relations(user, ({ many, one }) => ({
   sessions: many(session),
   accounts: many(account),
+  warpCredential: one(warpAuthCredential, {
+    fields: [user.id],
+    references: [warpAuthCredential.userId],
+  }),
 }));
+
+export const warpAuthCredentialRelations = relations(
+  warpAuthCredential,
+  ({ one }) => ({
+    user: one(user, {
+      fields: [warpAuthCredential.userId],
+      references: [user.id],
+    }),
+  }),
+);
 
 export const sessionRelations = relations(session, ({ one }) => ({
   user: one(user, {
