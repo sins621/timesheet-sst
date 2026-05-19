@@ -85,9 +85,13 @@ entries to a Warp Project that is linked to the Board. Seems simple enough?
 
 In the picture above I've created a rough mental model of the entity relationships
 for these different concepts related back to the user. The arrows represent what
-would be 'foreign keys' in a relational database. The only part here I'm not 
+would be 'foreign keys' in a relational database. The only part here I'm not
 entirely sure of is who should 'own' stubs because I can image a scenario where
 you have multiple boards and the message templates you create would be the same
-for all of them. The only difference is we would need to keep a record of the 
+for all of them. The only difference is we would need to keep a record of the
 status IDs that map to these conditions. We could instead reference a table that
 holds a collection of starting, ending and stationary IDs but I'm not sure.
+
+## Example repo
+
+[Golang](https://github.com/sins621/timesheets/tree/main/mcp_golang)
