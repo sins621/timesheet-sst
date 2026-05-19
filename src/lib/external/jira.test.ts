@@ -18,7 +18,7 @@ describe("getProjects", async () => {
     const TEST_AUTH_HEADERS = "Basic am9obkBleGFtcGxlLmNvbTphYmMxMjM=";
 
     nock("https://warpdevelopment.atlassian.net")
-      .get("/rest/api/4/project")
+      .get("/rest/api/3/project")
       .matchHeader("Authorization", TEST_AUTH_HEADERS)
       .reply(200, testProjects);
 
@@ -40,7 +40,7 @@ describe("getProjectsPaginated", async () => {
     const TEST_AUTH_HEADERS = "Basic am9obkBleGFtcGxlLmNvbTphYmMxMjM=";
 
     nock("https://warpdevelopment.atlassian.net")
-      .get("/rest/api/4/project/search")
+      .get("/rest/api/3/project/search")
       .matchHeader("Authorization", TEST_AUTH_HEADERS)
       .reply(200, testPaginatedProjectsResult);
 
@@ -62,7 +62,7 @@ describe("getProjectsPaginated", async () => {
     const QUERY = "lumix";
 
     nock("https://warpdevelopment.atlassian.net")
-      .get(`/rest/api/4/project/search?query=${QUERY}`)
+      .get(`/rest/api/3/project/search?query=${QUERY}`)
       .matchHeader("Authorization", TEST_AUTH_HEADERS)
       .reply(200, exampleQueriedProjectPaginatedSearchResult);
 

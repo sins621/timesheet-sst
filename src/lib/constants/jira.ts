@@ -1,7 +1,7 @@
 import { urlSchema } from "../schemas/common";
 import { Endpoint } from "../types/common";
 
-export const JIRA_API_URL = "https://warpdevelopment.atlassian.net/rest/api/4/";
+export const JIRA_API_URL = "https://warpdevelopment.atlassian.net/rest/api/3/";
 export const JIRA_ENDPOINTS: Record<string, Endpoint> = {
   projectSearch: {
     method: "GET",
