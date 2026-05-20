@@ -32,6 +32,11 @@ mainters can open issues. If you have a feature request, a bug report or any
 other inquiry please head towards the [discussion](https://github.com/sins621/timesheet-sst/discussions) section of
 this repository.
 
+## Architectural Overview
+
+This live [link](https://www.tldraw.com/p/-XyDBMROKtnRQAAfLuDOb?d=v-544.-640.3252.1611.BRqTNP0vnSLtqyl0khIpk) will be updated to maintain a visual representation of the 
+application's architecture.
+
 ## Contributing
 
 Please see the current [issues](https://github.com/sins621/timesheet-sst/issues) or [discussions](https://github.com/sins621/timesheet-sst/discussions) for the project and indicate by commenting that you would
