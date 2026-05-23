@@ -101,6 +101,7 @@ Mock Service Worker.
 - [Storybook](https://storybook.js.org/docs)
 - [Mock Service Worker](https://mswjs.io/docs)
 - [Nock](https://github.com/nock/nock)
+- [Faker](https://fakerjs.dev/)
 
 ## Style
 
