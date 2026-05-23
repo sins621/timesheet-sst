@@ -78,6 +78,29 @@ This project uses vitest with the storybook integration so that frontend tests
 can run inside of playwright. For mocking endpoints, the project incorporates
 Mock Service Worker.
 
+### Library Documentation
+
+- [Next.js](https://nextjs.org/docs)
+- [Nuqs](https://nuqs.dev/)
+- [Tanstack Query](https://tanstack.com/query/latest)
+- [BetterAuth](https://better-auth.com/docs/introduction)
+- [Tailwind](https://tailwindcss.com/)
+- [Shadcn](https://ui.shadcn.com/docs/components)
+- [Base-UI](https://base-ui.com/react/overview)
+- [Stepperize](https://stepperize.vercel.app/docs/react)
+- [Drizzle](https://orm.drizzle.team/)
+- [Got](https://www.npmjs.com/package/got)
+- [Zod](https://zod.dev/)
+- [React Hook Form](https://react-hook-form.com/docs)
+- [Neverthrow](https://github.com/supermacro/neverthrow)
+- [T3Env](https://env.t3.gg/docs/introduction)
+- [Dotenvx](https://dotenvx.com/docs/introduction)
+- [Vitest](https://vitest.dev/guide/)
+- [Playwright](https://playwright.dev/docs/intro)
+- [Storybook](https://storybook.js.org/docs)
+- [Mock Service Worker](https://mswjs.io/docs)
+- [Nock](https://github.com/nock/nock)
+
 ## Style
 
 Read the room.
