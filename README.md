@@ -50,6 +50,7 @@ Please see the [Documentation](./docs/) section for style guides, architecture g
 - Run `pnpm i`
 - See the [env](./src/env.ts), comments included for where to get envs or contact me
 - See the [package.json](./package.json) for commands to run the application
+- In order to run tests you must have Playwright installed with the chromium driver.
 
 ## Stack
 
