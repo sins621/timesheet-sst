@@ -1,12 +1,8 @@
 import { Result } from "neverthrow";
-import { DomainError } from "../constants/errors/domain-errors";
-import { InfraError } from "../constants/errors/infra-errors";
-import { RouteError } from "../constants/errors/route-errors";
 import { urlSchema } from "../schemas/common";
 import { z } from "zod";
 
 export type Url = z.infer<typeof urlSchema>;
-export type Error = InfraError | DomainError | RouteError;
 export type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
 export type Endpoint = {
   method: Method;
