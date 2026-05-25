@@ -5,9 +5,7 @@ import {
 } from "@/lib/constants/errors";
 import { got } from "got";
 import { err, ok, ResultAsync } from "neverthrow";
-import {
-  JIRA_ENDPOINTS as jiraEndpoints
-} from "../constants/jira";
+import { JIRA_ENDPOINTS as jiraEndpoints } from "../constants/jira";
 import {
   jiraProjectPaginatedSearchSchema,
   jiraProjectSchema,
@@ -33,8 +31,8 @@ export const getJiraProjects = (
 
 export const getJiraPaginatedProjects = async (
   authHeaders: AuthHeaders,
-  searchParams: {
-    query?: string;
+  searchParams?: {
+    query: string;
   },
 ) =>
   ResultAsync.fromPromise(
