@@ -1,13 +1,13 @@
 import nock from "nock";
 import { it, describe, expect } from "vitest";
-import { getJiraProjects, getJiraPaginatedProjects } from "./jira";
+import { getJiraProjects, getJiraPaginatedProjects } from "@/lib/external/jira";
 import {
   exampleProject,
   exampleProjectPaginatedSearchResult,
   exampleQueriedProjectPaginatedSearchResult,
-} from "../test-data/jira";
-import { getTestData } from "../test-data/common";
-import { constructBasicAuthHeaders } from "../utils/common";
+} from "@/lib/test-data/jira";
+import { getTestData } from "@/lib/test-data/common";
+import { constructBasicAuthHeaders } from "@/lib/utils/common";
 
 describe("getProjects", async () => {
   it("it should return an array of projects", async () => {

@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 import nock from "nock";
-import { getWarpAuthToken, getWarpProjects } from "./warp";
-import { warpEmailSchema } from "../schemas/warp";
+import { getWarpAuthToken, getWarpProjects } from "@/lib/external/warp";
+import { warpEmailSchema } from "@/lib/schemas/warp";
 import { constructBearerAuthHeaders } from "@/lib/utils/common";
 
 describe("getAuthToken", async () => {

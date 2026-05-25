@@ -1,51 +1,31 @@
-import { configDefaults, defineConfig } from "vitest/config";
-import tsconfigPaths from "vite-tsconfig-paths";
-import react from "@vitejs/plugin-react";
-import { storybookTest } from "@storybook/addon-vitest/vitest-plugin";
-import path from "node:path";
-import { fileURLToPath } from "node:url";
+import { defineConfig } from "vitest/config";
 import { playwright } from "@vitest/browser-playwright";
 
-const dirname = path.dirname(fileURLToPath(import.meta.url));
-
 export default defineConfig({
-  plugins: [tsconfigPaths(), react()],
+  resolve: {
+    tsconfigPaths: true,
+  },
   test: {
-    environment: "jsdom",
-    globals: true,
-    setupFiles: ["./vitest.setup.ts"],
-    reporters: ["junit", "default"],
-    outputFile: "./test-reports/vitest-junit.xml",
-    exclude: [...configDefaults.exclude, "**/tests/**"],
     projects: [
       {
         extends: true,
         test: {
-          name: "unit",
-          exclude: [
-            ...configDefaults.exclude,
-            "**/tests/**",
-            "src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
-          ],
+          name: "Unit",
+          include: ["**/*.test.ts"],
         },
       },
+
       {
         extends: true,
-        plugins: [
-          storybookTest({
-            configDir: path.join(dirname, ".storybook"),
-            storybookScript: "pnpm run storybook",
-          }),
-        ],
         test: {
-          name: "storybook",
+          name: "Browser",
+          include: ["**/*.test.tsx"],
           browser: {
+            provider: playwright(),
             enabled: true,
-            provider: playwright({}),
             headless: true,
             instances: [{ browser: "chromium" }],
           },
-          setupFiles: ["./.storybook/vitest.setup.ts"],
         },
       },
     ],

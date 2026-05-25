@@ -5,13 +5,13 @@ import {
 } from "@/lib/constants/errors";
 import { got } from "got";
 import { err, ok, ResultAsync } from "neverthrow";
-import { JIRA_ENDPOINTS as jiraEndpoints } from "../constants/jira";
+import { JIRA_ENDPOINTS as jiraEndpoints } from "@/lib/constants/jira";
 import {
   jiraProjectPaginatedSearchSchema,
   jiraProjectSchema,
-} from "../schemas/jira";
-import type { AuthHeaders } from "../types/common";
-import type { JiraProject } from "../types/jira";
+} from "@/lib/schemas/jira";
+import type { AuthHeaders } from "@/lib/types/common";
+import type { JiraProject } from "@/lib/types/jira";
 
 export const getJiraProjects = (
   authHeaders: AuthHeaders,

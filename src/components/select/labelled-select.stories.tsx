@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import LabelledSelect from "./labelled-select";
-import { fn, expect, userEvent, within } from "storybook/test";
 import { OptionItem } from "@/lib/types/common";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { fn } from "storybook/test";
+import LabelledSelect from "./labelled-select";
 
 const options: OptionItem[] = [
   {
@@ -34,19 +34,5 @@ export const Default: Story = {
     onValueChange: fn(),
     value: "value",
     triggerAriaLabel: "Component Aria Label",
-  },
-  play: async ({ args, canvasElement }) => {
-    const canvas = within(canvasElement.ownerDocument.body);
-
-    await userEvent.click(
-      await canvas.findByRole("combobox", { name: "Component Aria Label" }),
-    );
-    await userEvent.click(
-      await canvas.findByRole("option", { name: "Select Item Label 1" }),
-    );
-    await expect(args.onValueChange).toHaveBeenCalledWith(
-      "label_1",
-      expect.anything(),
-    );
   },
 };

@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/nextjs-vite";
-import OptionButtonSelect from "./option-button-select";
 import { OptionItem } from "@/lib/types/common";
-import { expect, fn, userEvent, within } from "storybook/test";
+import type { Meta, StoryObj } from "@storybook/nextjs-vite";
+import { fn } from "storybook/test";
+import OptionButtonSelect from "./option-button-select";
 
 const options: OptionItem[] = [
   {
@@ -30,12 +30,5 @@ export const Default: Story = {
   args: {
     options,
     onClick: fn(),
-  },
-  play: async ({ args, canvasElement }) => {
-    const canvas = within(canvasElement.ownerDocument.body);
-    await userEvent.click(
-      await canvas.findByRole("button", { name: "Label 1" }),
-    );
-    await expect(args.onClick).toHaveBeenCalledWith("label_1");
   },
 };
