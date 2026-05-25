@@ -1,8 +1,8 @@
 import {
-  type InfraError,
+  type AppError,
   externalServiceError,
   validationError,
-} from "@/lib/constants/errors/infra-errors";
+} from "@/lib/constants/errors";
 import { got } from "got";
 import { ResultAsync, err, ok } from "neverthrow";
 import { WARP_ENDPOINTS } from "../constants/warp";
@@ -13,7 +13,7 @@ import type { WarpProject, WarpEmail } from "../types/warp";
 export const getWarpAuthToken = (
   email: WarpEmail,
   password: string,
-): ResultAsync<string, InfraError> =>
+): ResultAsync<string, AppError> =>
   ResultAsync.fromPromise(
     got
       .post(WARP_ENDPOINTS.authorise.url, {
@@ -34,7 +34,7 @@ export const getWarpAuthToken = (
 
 export const getWarpProjects = (
   authHeaders: AuthHeaders,
-): ResultAsync<WarpProject[], InfraError> =>
+): ResultAsync<WarpProject[], AppError> =>
   ResultAsync.fromPromise(
     got(WARP_ENDPOINTS.getProjects.url, {
       headers: authHeaders,

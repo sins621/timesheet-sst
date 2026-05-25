@@ -1,8 +1,8 @@
 import {
-  type InfraError,
+  type AppError,
   externalServiceError,
   validationError,
-} from "@/lib/constants/errors/infra-errors";
+} from "@/lib/constants/errors";
 import { got } from "got";
 import { err, ok, ResultAsync } from "neverthrow";
 import {
@@ -18,7 +18,7 @@ import type { JiraProject, JiraProjectPaginatedSearch } from "../types/jira";
 
 export const getJiraProjects = (
   authHeaders: AuthHeaders,
-): ResultAsync<JiraProject[], InfraError> =>
+): ResultAsync<JiraProject[], AppError> =>
   ResultAsync.fromPromise(
     got(jiraEndpoints.projectSearch.url, {
       headers: authHeaders,
