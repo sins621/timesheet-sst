@@ -2,7 +2,7 @@
 
 import { Accordion as AccordionPrimitive } from "@base-ui/react/accordion"
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils/common"
 import { HugeiconsIcon } from "@hugeicons/react"
 import { ArrowDown01Icon, ArrowUp01Icon } from "@hugeicons/core-free-icons"
 

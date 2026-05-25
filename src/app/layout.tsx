@@ -1,5 +1,5 @@
 import { AppProviders } from "@/components/providers/app-providers";
-import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils/common";
 import { isMSWEnabled } from "@/lib/utils/is-MSW-enabled";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Inter } from "next/font/google";
