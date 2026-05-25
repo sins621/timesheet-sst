@@ -6,15 +6,14 @@ import {
 import { got } from "got";
 import { err, ok, ResultAsync } from "neverthrow";
 import {
-  JIRA_ENDPOINTS as jiraEndpoints,
-  JiraProjectPaginatedSearchParams,
+  JIRA_ENDPOINTS as jiraEndpoints
 } from "../constants/jira";
 import {
   jiraProjectPaginatedSearchSchema,
   jiraProjectSchema,
 } from "../schemas/jira";
-import type { ApiRequest, AuthHeaders } from "../types/common";
-import type { JiraProject, JiraProjectPaginatedSearch } from "../types/jira";
+import type { AuthHeaders } from "../types/common";
+import type { JiraProject } from "../types/jira";
 
 export const getJiraProjects = (
   authHeaders: AuthHeaders,
@@ -32,10 +31,12 @@ export const getJiraProjects = (
     return ok(parsed.data);
   });
 
-export const getJiraPaginatedProjects: ApiRequest<
-  JiraProjectPaginatedSearch,
-  JiraProjectPaginatedSearchParams
-> = async (authHeaders, searchParams) =>
+export const getJiraPaginatedProjects = async (
+  authHeaders: AuthHeaders,
+  searchParams: {
+    query?: string;
+  },
+) =>
   ResultAsync.fromPromise(
     got(jiraEndpoints.projectPaginatedSearch.url, {
       headers: authHeaders,
