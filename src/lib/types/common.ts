@@ -1,6 +1,5 @@
-import { Result } from "neverthrow";
-import { urlSchema } from "../schemas/common";
 import { z } from "zod";
+import { urlSchema } from "../schemas/common";
 
 export type Url = z.infer<typeof urlSchema>;
 export type Method = "GET" | "POST" | "PUT" | "PATCH" | "DELETE";
