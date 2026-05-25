@@ -21,6 +21,8 @@ export const env = createEnv({
     APP_ENV: z.enum(["test", "development", "production"]),
     WARP_TEST_USERNAME: warpEmailSchema.optional(),
     WARP_TEST_PASSWORD: z.string().min(1).optional(),
+    // B.C. Neon is annoying to host locally
+    DB_TYPE: z.enum(["Default", "Neon"]).optional(),
   },
   client: {
     NEXT_PUBLIC_ENABLE_MSW_MOCK: z.coerce.boolean(),
@@ -39,5 +41,6 @@ export const env = createEnv({
     NEXT_PUBLIC_ENABLE_MSW_MOCK: process.env.NEXT_PUBLIC_ENABLE_MSW_MOCK,
     WARP_TEST_USERNAME: process.env.WARP_TEST_USERNAME,
     WARP_TEST_PASSWORD: process.env.WARP_TEST_PASSWORD,
+    DB_TYPE: process.env.DB_TYPE,
   },
 });

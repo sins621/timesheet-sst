@@ -54,3 +54,6 @@ test-reports/
 /blob-report/
 /playwright/.cache/
 /playwright/.auth/
+
+# local db
+db-data/
