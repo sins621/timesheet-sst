@@ -15,15 +15,3 @@ export const Default: Story = {
     onClick: fn(),
   },
 };
-
-export const StationaryClickedTest: Story = {
-  args: {
-    onClick: fn(),
-  },
-};
-
-export const TransitionClickedTest: Story = {
-  args: {
-    onClick: fn(),
-  },
-};
