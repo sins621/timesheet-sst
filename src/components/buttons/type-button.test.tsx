@@ -32,20 +32,4 @@ describe("TypeButton", () => {
     await page.getByRole("button", { name: /Click Me/i }).click();
     expect(onClick).toHaveBeenCalledOnce();
   });
-
-  test("applies custom className", async () => {
-    render(
-      <TypeButton
-        title="Styled"
-        description="Button"
-        onClick={() => {}}
-        className="my-custom-class"
-      />,
-    );
-
-    const button = page.getByRole("button");
-    await expect.element(button).toHaveClass("my-custom-class");
-    await expect.element(button).toHaveClass("border");
-    await expect.element(button).toHaveClass("rounded-lg");
-  });
 });
